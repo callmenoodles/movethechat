@@ -44,12 +44,6 @@ function moveChat(direction) {
 }
 
 function init() {
-  if (window.isChatObserving) {
-    return;
-  }
-
-  window.isChatObserving = true;
-
   let currentUsername = null;
   let currentChatroomParent = null;
   let currentPlayerChildren = null;
