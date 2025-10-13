@@ -20,10 +20,6 @@ body {
     "Helvetica Neue",
     sans-serif;
   padding: 12px 12px 2px 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 h1 {
@@ -32,6 +28,7 @@ h1 {
   font-size: 18px;
   font-family: "Inter", sans-serif;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 form {
@@ -40,7 +37,6 @@ form {
   gap: 10px;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .footnote {
@@ -48,6 +44,7 @@ form {
   margin-bottom: 6px;
   width: 100%;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .footnote a {

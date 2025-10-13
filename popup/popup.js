@@ -1,4 +1,7 @@
-browser.storage.local.get("direction").then((res) => {
+const storage =
+  typeof browser === "undefined" ? chrome.storage : browser.storage;
+
+storage.local.get("direction").then((res) => {
   const direction = res.direction || "right";
   const radioButton = document.getElementById(direction);
   radioButton.checked = true;
@@ -6,21 +9,25 @@ browser.storage.local.get("direction").then((res) => {
 
 document.querySelectorAll('input[name="direction"]').forEach((radio) => {
   radio.addEventListener("change", function () {
+    console.log("CHANGE")
     if (radio.checked) {
       const value = radio.value;
 
-      browser.storage.local.set({
+      storage.local.set({
         direction: value,
       });
 
-      browser.tabs
+      const tabs =
+        typeof browser === "undefined" ? chrome.tabs : browser.tabs;
+
+      tabs
         .query({
           active: true,
           currentWindow: true,
         })
-        .then((tabs) => {
-          browser.tabs
-            .sendMessage(tabs[0].id, {
+        .then((resTabs) => {
+          tabs
+            .sendMessage(resTabs[0].id, {
               action: "changeDirection",
               position: value,
             })

@@ -1,12 +1,15 @@
-browser.runtime.onMessage.addListener((message) => {
+const runtime =
+  typeof browser === "undefined" ? chrome.runtime : browser.runtime;
+
+runtime.onMessage.addListener((message) => { 
   if (message.action === "changeDirection") {
     moveChat(message.position);
   }
 });
 
 function moveChat(direction) {
-  direction =  direction ?? "right"
-  
+  direction = direction ?? "right";
+
   const chat = document.getElementById("channel-chatroom");
   const main = document.querySelector("main");
 
@@ -14,7 +17,7 @@ function moveChat(direction) {
   if (chat && main && !main.contains(chat)) {
     const btnExpand = main.querySelector("button");
     const btnCollapse = chat.firstChild.querySelector("div");
-
+    
     if (direction === "left") {
       main.before(chat);
 
@@ -50,6 +53,8 @@ function init() {
 
   const observer = new MutationObserver(() => {
     const usernameElement = document.getElementById("channel-username");
+    const storage =
+      typeof browser === "undefined" ? chrome.storage : browser.storage;
 
     if (usernameElement) {
       const username = usernameElement.innerText.trim();
@@ -57,9 +62,9 @@ function init() {
       if (username !== currentUsername) {
         currentUsername = username;
 
-        browser.storage.local.get("direction").then((res) => {
+        storage.local.get("direction").then((res) => {
           const direction = res.direction;
-          moveChat(direction)
+          moveChat(direction);
         });
       }
     }
@@ -70,26 +75,26 @@ function init() {
       if (chat.parentElement !== currentChatroomParent) {
         currentChatroomParent = chat.parentElement;
 
-        browser.storage.local.get("direction").then((res) => {
+        storage.local.get("direction").then((res) => {
           const direction = res.direction;
-          moveChat(direction)
+          moveChat(direction);
         });
       }
     }
 
     // HOTFIX: More than 2 elements?
-    const player = document.getElementById("video-player").parentElement;
+    const video = document.getElementById("video-player")
+    const player = video.parentElement;
     if (player) {
       if (player.childElementCount !== currentPlayerChildren) {
         currentPlayerChildren = player.childElementCount;
 
         if (currentPlayerChildren > 1) {
-          browser.storage.local.get("direction").then((result) => {
+          storage.local.get("direction").then((result) => {
             const direction = result.direction || "right";
             const controls = player.lastChild;
-              
+
             if (direction === "left") {
-              console.log(controls.classList);
               controls.classList.replace("left-0", "right-0");
             } else {
               controls.classList.replace("right-0", "left-0");
@@ -109,13 +114,7 @@ function init() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initChatMover);
-
-  browser.runtime.onMessage.addListener((message) => {
-    if (message.action === "changeDirection") {
-      moveChat(message.position);
-    }
-  });
+  document.addEventListener("DOMContentLoaded", init);
 } else {
   init();
 }
