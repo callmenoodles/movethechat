@@ -30,7 +30,7 @@
   "content_scripts": [
     {
       "matches": ["*://kick.com/*"],
-      "js": ["kick.js"]
+      "js": ["scripts/kick.js"]
     }
   ]
 }
