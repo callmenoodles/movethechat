@@ -23,6 +23,9 @@ A clear and concise description of what you expected to happen.
 - [ ] Gecko (Firefox, Librewolf, Floorp, ...)
 - [ ] Chromium (Chrome, Edge, Brave, Opera, ...)
 
+**Streaming Platform:**
+- [ ] Kick
+
 **Version:**
 0.2.0
 
