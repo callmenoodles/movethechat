@@ -1,7 +1,7 @@
 const runtime =
   typeof browser === "undefined" ? chrome.runtime : browser.runtime;
 
-runtime.onMessage.addListener((message) => { 
+runtime.onMessage.addListener((message) => {
   if (message.action === "changeDirection") {
     moveChat(message.position);
   }
@@ -12,12 +12,16 @@ function moveChat(direction) {
 
   const chat = document.getElementById("channel-chatroom");
   const main = document.querySelector("main");
+  const messages = document.getElementById("chatroom-messages");
+  const scrollPosition = messages.scrollTop;
+  
+  console.log("[Move The Chat]: " + messages.scrollTop);
 
   // Chat is inside main on mobile layouts
   if (chat && main && !main.contains(chat)) {
     const btnExpand = main.querySelector("button");
     const btnCollapse = chat.firstChild.querySelector("div");
-    
+
     if (direction === "left") {
       main.before(chat);
 
@@ -43,6 +47,8 @@ function moveChat(direction) {
         btnCollapse.querySelector("svg").style.transform = "scale(1,1)";
       }
     }
+    
+    messages.scrollTop = scrollPosition;
   }
 }
 
@@ -83,7 +89,7 @@ function init() {
     }
 
     // HOTFIX: More than 2 elements?
-    const video = document.getElementById("video-player")
+    const video = document.getElementById("video-player");
     const player = video.parentElement;
     if (player) {
       if (player.childElementCount !== currentPlayerChildren) {

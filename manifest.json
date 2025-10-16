@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Move The Chat",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Move livestream chats to the other side. [Currently supports Kick Chat only]",
   "homepage_url": "https://github.com/callmenoodles/movethechat",
   "developer": {
