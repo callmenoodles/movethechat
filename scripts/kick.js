@@ -15,8 +15,6 @@ function moveChat(direction) {
   const messages = document.getElementById("chatroom-messages");
   const scrollPosition = messages.scrollTop;
   
-  console.log("[Move The Chat]: " + messages.scrollTop);
-
   // Chat is inside main on mobile layouts
   if (chat && main && !main.contains(chat)) {
     const btnExpand = main.querySelector("button");
