@@ -21,13 +21,16 @@ function moveChat(direction) {
   if (chat && main && !main.contains(chat)) {
     const btnExpand = main.querySelector("button");
     const btnCollapse = chat.firstChild.querySelector("div");
+    const btnExpandText = btnExpand.querySelector("span");
+    const btnExpandIcon = btnExpand.querySelector("svg");
 
     if (direction === "left") {
       main.before(chat);
 
-      if (btnExpand) {
-        btnExpand.firstChild.style.transform = "scale(-1,1)";
+      if (btnExpand) { 
+        btnExpandIcon.style.transform = "scale(-1,1)";
         btnExpand.parentElement.classList.replace("right-7", "ml-7");
+        btnExpandText.after(btnExpandIcon);
       }
 
       if (btnCollapse) {
@@ -38,8 +41,9 @@ function moveChat(direction) {
       main.after(chat);
 
       if (btnExpand) {
-        btnExpand.firstChild.style.transform = "scale(1, 1)";
+        btnExpandIcon.style.transform = "scale(1, 1)";
         btnExpand.parentElement.classList.replace("ml-7", "right-7");
+        btnExpandText.before(btnExpandIcon);
       }
 
       if (btnCollapse) {
