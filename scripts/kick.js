@@ -14,7 +14,7 @@ function moveChat(direction) {
   const main = document.querySelector("main");
   const messages = document.getElementById("chatroom-messages");
   const scrollPosition = messages.scrollTop;
-  
+
   // Chat is inside main on mobile layouts
   if (chat && main && !main.contains(chat)) {
     const btnExpand = main.querySelector("button");
@@ -25,7 +25,7 @@ function moveChat(direction) {
     if (direction === "left") {
       main.before(chat);
 
-      if (btnExpand) { 
+      if (btnExpand) {
         btnExpandIcon.style.transform = "scale(-1,1)";
         btnExpand.parentElement.classList.replace("right-7", "ml-7");
         btnExpandText.after(btnExpandIcon);
@@ -49,7 +49,7 @@ function moveChat(direction) {
         btnCollapse.querySelector("svg").style.transform = "scale(1,1)";
       }
     }
-    
+
     messages.scrollTop = scrollPosition;
   }
 }
@@ -88,6 +88,27 @@ function init() {
           moveChat(direction);
         });
       }
+    }
+
+    const userCard = document.getElementById("user-identity");
+
+    if (userCard) {
+      const chatWidth = getComputedStyle(userCard).getPropertyValue("--chat-width");
+      const sidebar = document.getElementById("sidebar-wrapper");
+      let sidebarWidth = 0;
+      
+      if (sidebar) {
+        sidebarWidth = sidebar.offsetWidth;
+      }
+      
+      storage.local.get("direction").then((res) => {
+        if (res.direction === "left") {
+          userCard.style.left = parseInt(chatWidth) + sidebarWidth + "px";
+        }
+        else {
+          userCard.style.removeProperty("left");
+        }
+      });
     }
 
     // HOTFIX: More than 2 elements?
