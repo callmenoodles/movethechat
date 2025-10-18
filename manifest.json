@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Move The Chat",
-  "version": "0.2.1.1",
+  "version": "0.2.2",
   "description": "Move livestream chats to the other side. [Currently supports Kick Chat only]",
   "homepage_url": "https://github.com/callmenoodles/movethechat",
   "developer": {
@@ -13,7 +13,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "1f8a9c3a-2e72-4c91-a2d3-5b000f2cfcf2"
+      "id": "{b7ec307f-b892-4508-85a0-5e504e51bd73}"
     }
   },
   "action": {
@@ -32,7 +32,7 @@
     ]
   },
   "host_permissions": ["*://kick.com/*"],
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["*://kick.com/*"],

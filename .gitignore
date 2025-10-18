@@ -1,5 +1,6 @@
 icons/*.xcf
 icons/icon-dark.png
 icons/icon-light.png
+icons/icon-color-128.png
 *.zip
 dist
